@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
 })
-export class AuthPage implements OnInit {
+export class AuthPage  {
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -15,7 +15,10 @@ export class AuthPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  submit(){
+    console.log(this.form.value)
   }
+
+  
 
 }

@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HeaderComponent, CustomInputComponent, LogoComponent],
-  exports: [HeaderComponent, CustomInputComponent, LogoComponent],
+  exports: [HeaderComponent, CustomInputComponent, LogoComponent, ReactiveFormsModule],
   imports: [
     CommonModule,
     IonicModule,
