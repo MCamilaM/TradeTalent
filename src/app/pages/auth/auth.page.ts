@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { user} from 'src/app/models/user.model';
+import { FirebaseService } from 'src/app/services/firebase.service';
+
+
 
 @Component({
   selector: 'app-auth',
@@ -13,12 +17,15 @@ export class AuthPage  {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor() { }
+  firebaseSvc = inject(FirebaseService);
 
-  submit(){
-    console.log(this.form.value)
+  submit() {
+  if(this.form.valid) {
+    this.firebaseSvc.signIn(this.form.value as user) 
+    .then(res =>{
+
+    console.log(res);
+    })
+   } 
   }
-
-  
-
 }
