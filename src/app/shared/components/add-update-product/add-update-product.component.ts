@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
@@ -5,21 +6,25 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.page.html',
-  styleUrls: ['./forgot-password.page.scss'],
+  selector: 'app-add-update-product',
+  templateUrl: './add-update-product.component.html',
+  styleUrls: ['./add-update-product.component.scss'],
 })
-export class ForgotPasswordPage implements OnInit {
+export class AddUpdateProductComponent  implements OnInit {
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    id: new FormControl(''),
+    image: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    price: new FormControl('', [Validators.required, Validators.min(0)]),
+    soldUnits: new FormControl('', [Validators.required, Validators.min(0)]),
   });
 
   firebaseSvc = inject(FirebaseService);
-  utilsSvc = inject(UtilsService)
+  utilsSvc = inject(UtilsService);
 
-  ngOnInit(){
-    
+  ngOnInit() {
+
   }
 
   async submit() {
@@ -27,20 +32,12 @@ export class ForgotPasswordPage implements OnInit {
       const loading = await this.utilsSvc.loading();
       await loading.present()
 
-      this.firebaseSvc.sendRecoveryEmail(this.form.value.email)
-        .then(res => {
+      this.firebaseSvc.signUp(this.form.value as User)
+        .then(async res => {
 
+          await this.firebaseSvc.updateUser(this.form.value.name);
 
-          this.utilsSvc.presentToast({
-            message: `Correo enviado con éxito`,
-            duration: 2500,
-            color: 'primary',
-            position: 'bottom',
-            icon: 'mail-outline'
-          });
-
-          this.utilsSvc.routerLink('/auth')
-          this.form.reset();
+          let uid = res.user.uid;
 
         }).catch(error => {
           console.log(error);
