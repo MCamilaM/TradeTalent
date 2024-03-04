@@ -6,19 +6,22 @@ import { LogoComponent } from './components/logo/logo.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddUpdateProductComponent } from './components/add-update-product/add-update-product.component';
+import { AddUpdateProfileComponent } from './components/add-update-profile/add-update-profile.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
-    AddUpdateProductComponent
+    AddUpdateProductComponent,
+    AddUpdateProfileComponent
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     AddUpdateProductComponent,
+    AddUpdateProfileComponent,
     ReactiveFormsModule,
   ],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule],

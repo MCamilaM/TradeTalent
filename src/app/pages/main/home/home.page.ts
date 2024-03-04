@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   utilsSvc = inject(UtilsService);
 
   products: Product[] = [];
+  users: User[] = [];
   loading: boolean = false;
 
   constructor() { }
@@ -28,27 +29,51 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.getProducts();
+    this.getProfiles();
   }
 
-  // ========== Get products =======================
-  getProducts() {
-
-    let path = `user/${this.user().uid}/products`;
+  getProfiles(){
+    let path = `users`;
 
     this.loading = true;
 
     let sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.products = res;
+        this.users = res;
 
         this.loading = false;
         sub.unsubscribe;
       }
     })
-
   }
+
+  // ========== Get products =======================
+  // getProducts() {
+
+  //   let path = `user/${this.user().uid}/products`;
+
+  //   this.loading = true;
+
+  //   let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+  //     next: (res: any) => {
+  //       console.log(res);
+  //       this.products = res;
+
+  //       this.loading = false;
+  //       sub.unsubscribe;
+  //     }
+  //   })
+
+  //   let sub2 = this.firebaseSvc.getCollectionData('users').subscribe({
+  //     next: (res: any) => {
+  //       console.log(res);
+
+  //       sub2.unsubscribe;
+  //     }
+  //   })
+
+  // }
 
   async addUpdateProduct(product?: Product) {
     let success = await this.utilsSvc.presentModal({
@@ -57,7 +82,7 @@ export class HomePage implements OnInit {
       componentProps: { product }
     })
 
-    if (success) this.getProducts();
+    if (success) this.getProfiles();
 
   }
 
