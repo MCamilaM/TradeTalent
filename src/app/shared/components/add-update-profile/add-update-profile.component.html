@@ -1,11 +1,7 @@
-<app-header [isModal]="true"
-	[title]="emptyUser ? 'Actualizar producto' : 'Agregar producto'"></app-header>
+<app-header [isModal]="true" title="Actualizar perfil"></app-header>
 <ion-content>
 
-	<form [formGroup]="form"
-		(ngSubmit)="submit()"
-		(keypress.enter)="submit()"
-		class="ion-padding ion-text-center">
+	<form [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()" class="ion-padding ion-text-center">
 
 		<ion-avatar *ngIf="form.value.image">
 			<img [src]="form.value.image" />
@@ -16,70 +12,54 @@
 		<br>
 
 		<!-- =========== Take a photo / pick a photo ============== -->
-		<ion-button (click)="takeImage()"
-			size="small"
-			shape="round">
+		<ion-button (click)="takeImage()" size="small" shape="round">
 			Tomar/Seleccionar una imagen
 		</ion-button>
 
 		<!-- =========== Name ============== -->
-		<app-custom-input [control]="form.controls.name"
-			autoComplete="name"
-			type="text"
-			label="Nombre"></app-custom-input>
+		<ion-item class="custom-input" lines="none">
+			<ion-input type="text" autocomplete="name" label="Nombre" formControlName="name" id="name"
+				label-placement="floating">
+			</ion-input>
+		</ion-item>
 
-		<div *ngIf="form.controls.name.errors && form.controls.name.touched"
-			class="validators">
-			<div *ngIf="form.controls.name.errors?.['required']">
-				El nombre es requerido
-			</div>
+		<!-- =========== Biography ============== -->
+		<ion-item class="custom-input" lines="none">
+			<ion-input type="text" autocomplete="biography" label="Biografia" formControlName="biography" id="biography"
+				label-placement="floating">
+			</ion-input>
+		</ion-item>
 
-			<div *ngIf="form.controls.name.errors?.['minLenght']">
-				El nombre debe tener al menos 3 caracteres
-			</div>
-		</div>
+		<!-- =========== abilities ============== -->
+		<ion-item class="custom-input" lines="none">
+			<ion-input type="text" autocomplete="abilities" label="Habilidades" formControlName="abilities" id="abilities"
+				label-placement="floating">
+			</ion-input>
+		</ion-item>
 
-		<!-- =========== Price  ============== -->
-		<!-- <app-custom-input [control]="form.controls.price"
-			type="number"
-			label="Precio"></app-custom-input>
+		<!-- =========== country ============== -->
+		<ion-item class="custom-input" lines="none">
+			<ion-input type="text" autocomplete="country" label="País" formControlName="country" id="country"
+				label-placement="floating">
+			</ion-input>
+		</ion-item>
 
-		<div *ngIf="form.controls.price.errors && form.controls.price.touched"
-			class="validators">
-			<div *ngIf="form.controls.price.errors?.['required']">
-				Este campo es requerido
-			</div>
-
-			<div *ngIf="form.controls.price.errors?.['min']">
-				El precio minimo debe ser 0
-			</div>
-		</div> -->
-
-		<!-- =========== Sold Units ============== -->
-		<!-- <app-custom-input [control]="form.controls.soldUnits"
-			type="number"
-			label="Unidades vendidas"></app-custom-input>
-
-		<div *ngIf="form.controls.soldUnits.errors && form.controls.soldUnits.touched"
-			class="validators">
-			<div *ngIf="form.controls.soldUnits.errors?.['required']">
-				Este campo es requerido
-			</div>
-
-			<div *ngIf="form.controls.soldUnits.errors?.['min']">
-				La cantidad minima debe ser 0
-			</div>
-		</div> -->
-
-		<!-- =========== Save product button ============== -->
-		<!-- <ion-button [disabled]="form.invalid"
+		<!-- =========== priceForHour ============== -->
+		<ion-item class="custom-input" lines="none">
+			<ion-input type="number" autocomplete="priceForHour" label="Precio por Hora" formControlName="priceForHour" id="priceForHour"
+				label-placement="floating">
+			</ion-input>
+		</ion-item>
+	
+		<!-- =========== update profile button ============== -->
+		<ion-button [disabled]="form.invalid"
 			mode="ios"
 			class="ion-margin"
 			type="submit">
-			{{product ? 'Actualizar producto' : 'Agregar producto'}}
+			Actualizar perfil
 			<ion-icon slot="end"
 				name="checkmark-circle-outline"></ion-icon>
-		</ion-button> -->
+		</ion-button>
 
 	</form>
 </ion-content>

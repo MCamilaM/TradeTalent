@@ -14,6 +14,8 @@ export class CustomInputComponent  implements OnInit {
   @Input() label!:string;
   @Input() autoComplete!:string;
   @Input() icon!:string;
+  @Input() formControlName!:string;
+  @Input() id!:string;
 
   isPassword!: boolean;
   hide: boolean = true;

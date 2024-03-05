@@ -26,6 +26,29 @@ export class ProfilePage implements OnInit {
     return this.utilsSvc.getFromLocalStorage('user');
   }
 
+  getUser() {
+    let path = `users/${this.user.uid}`;
+
+    this.firebaseSvc.getDocument(path)
+      .then((user: User) => {
+
+        this.utilsSvc.saveInLocalStorage('user', user);
+        this.user = user;
+
+      }).catch(error => {
+        console.log(error);
+
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'primary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        })
+
+      })
+  }
+
   async addUpdateProfile(user?: User) {
     let success = await this.utilsSvc.presentModal({
       component: AddUpdateProfileComponent,
@@ -33,7 +56,7 @@ export class ProfilePage implements OnInit {
       componentProps: { user }
     })
 
-    // if (success) this.getProfiles();
+    if (success) this.getUser();
 
   }
 

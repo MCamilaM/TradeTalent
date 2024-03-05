@@ -6,15 +6,16 @@
     </ion-card-header>
     <ion-card-content>
       <div class="profile-picture">
-        <img [src]="user.image || 'assets/icon/favicon.png'" alt="Foto de perfil">
+        <img [src]="user.image || 'assets/icon/profile.png'" alt="Foto de perfil">
       </div>
       <div class="profile-info">
         <h2><strong>{{user.name}}</strong></h2>
-        <p>Email: {{user.email}}</p>
-        <p>Biografía: {{user.biography}}</p>
-        <p>Habilidades: {{user.abilities}}</p>
-        <p>País: {{user.country}}</p>
-        <p>Precio por hora: {{user.priceForHour}}</p>
+        <br>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        <p><strong>Biografía:</strong> {{user.biography}}</p>
+        <p><strong>Habilidades:</strong> {{user.abilities}}</p>
+        <p><strong>País:</strong> {{user.country}}</p>
+        <p><strong>Precio por hora:</strong> {{user.priceForHour |  currency: 'USD'}}</p>
         <ion-button (click)="addUpdateProfile()" expand="block" color="primary">Editar perfil</ion-button>
       </div>
     </ion-card-content>

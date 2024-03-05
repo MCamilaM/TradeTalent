@@ -1,21 +1,26 @@
 <app-header title="Inicio"></app-header>
 
 <ion-content>
- 
+
   <ion-grid [fixed]="true">
     <ion-row>
-      <ion-col *ngFor="let p of users" >
+      <ion-col *ngFor="let user of users">
 
-        <ion-card>
-          <img alt="profile" [src]="p.image || 'assets/icon/favicon.png'" />
+        <ion-card mode="ios" class="custom-card">
+          <div class="profile-picture">
+            <img [src]="user.image || 'assets/icon/profile.png'" alt="Foto de perfil">
+          </div>
           <ion-card-header>
-            <ion-card-title>{{p.name}}</ion-card-title>
-            <ion-card-subtitle>{{p.priceForHour}}</ion-card-subtitle>
+            <ion-card-subtitle>{{user.abilities}}</ion-card-subtitle>
+            <ion-card-title>{{user.name}}</ion-card-title>
           </ion-card-header>
-        
+
           <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
+            {{user.biography}}
           </ion-card-content>
+
+          <ion-button fill="solid" shape="round">Ver perfil</ion-button>
+          <ion-button fill="solid" shape="round">{{user.priceForHour | currency: 'USD'}} / hr</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -46,16 +51,16 @@
         </ion-label>
       </ion-item> -->
 
-      <!-- Opciones -->
+  <!-- Opciones -->
 
-      <!-- <ion-item-options> -->
-        <!-- Editar -->
-        <!-- <ion-item-option (click)="addUpdateProduct(p)">
+  <!-- <ion-item-options> -->
+  <!-- Editar -->
+  <!-- <ion-item-option (click)="addUpdateProduct(p)">
           <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option> -->
 
-        <!-- Eliminar -->
-        <!-- <ion-item-option (click)="confirmDeleteProduct(p)" color="danger">
+  <!-- Eliminar -->
+  <!-- <ion-item-option (click)="confirmDeleteProduct(p)" color="danger">
           <ion-icon class="option-btn" name="trash-outline"></ion-icon>
         </ion-item-option>
       </ion-item-options>

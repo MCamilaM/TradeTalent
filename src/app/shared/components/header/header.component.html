@@ -4,18 +4,21 @@
 		<ion-buttons slot="start">
 			<ion-back-button *ngIf="backButton"
 				[defaultHref]="backButton"></ion-back-button>
-
 			<ion-button (click)="dismissModal()" *ngIf="isModal">
 				<ion-icon name="close-circle-outline"></ion-icon>
 			</ion-button>
-
 		</ion-buttons>
 
 		<ion-title>
-
-			<strong>{{title}}</strong>
-			<div class="admin">A D M I N</div>
-
-		</ion-title>
+			<ion-row>
+			  <ion-col size="auto">
+				<img src="assets/icon/logo.png" alt="logo" style="height: 40px; width: auto;">
+			  </ion-col>
+			  <ion-col>
+				<strong>{{title}}</strong>
+				<div class="admin">TradeTalent</div>
+			  </ion-col>
+			</ion-row>
+		  </ion-title>
 	</ion-toolbar>
 </ion-header>
