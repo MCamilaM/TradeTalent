@@ -1,0 +1,31 @@
+ion-content {
+    color: #3C5E7B;
+    background-color:#f6f8fc;
+    --pading-top: 20px 
+}
+
+ion-item{
+    font-size:14px;
+    color: var(--ion-color-primary);
+    ion-icon {
+        color:var(--ion-color-secondary);
+    }
+&.active{
+    color: var(--ion-color-dark);
+    ion-icon {
+        color:var(--ion-color-dark);
+    }
+}
+}
+h4{
+    margin-top: 5px;
+    font-weight: bold;
+}
+.avatar-icon{
+    font-size: 150px;
+    
+}
+
+ion-menu{
+    outline: none;
+}
