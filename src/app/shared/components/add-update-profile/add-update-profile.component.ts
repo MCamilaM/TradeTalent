@@ -52,7 +52,7 @@ export class AddUpdateProfileComponent implements OnInit {
       await loading.present()
 
       // create image file
-      if (this.form.value.image != '' && this.user.image == '') {
+      if (this.form.value.image != '' && this.user.image == '' ) {
         let dataUrl = this.form.value.image;
         let imagePath = `users/${this.user.uid}/${Date.now()}`;
         let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl)
@@ -60,7 +60,7 @@ export class AddUpdateProfileComponent implements OnInit {
       }
 
       // if change the image, upload the new image and get the url
-      if (this.form.value.image != this.user.image && this.user.image !== '') {
+      if (this.form.value.image != this.user.image && this.form.value.image !== '' && this.user.image !== '') {
         let dataUrl = this.form.value.image;
         let imagePath = await this.firebaseSvc.getFilePath(this.user.image);
         let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl)
