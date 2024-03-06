@@ -34,7 +34,6 @@ export class AddUpdateProfileComponent implements OnInit {
     });
 
     this.user = this.utilsSvc.getFromLocalStorage('user');
-    console.log(this.user)
     if (this.user) this.form.patchValue(this.user);
   }
 
@@ -52,18 +51,18 @@ export class AddUpdateProfileComponent implements OnInit {
       await loading.present()
 
       // create image file
-      if (this.form.value.image != '' && this.user.image == '' ) {
+      if (this.form.value.image != '' && this.user.image == '' || this.user.image == undefined) {
         let dataUrl = this.form.value.image;
         let imagePath = `users/${this.user.uid}/${Date.now()}`;
-        let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl)
+        let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
         this.form.controls['image'].setValue(imageUrl);
       }
 
       // if change the image, upload the new image and get the url
-      if (this.form.value.image != this.user.image && this.form.value.image !== '' && this.user.image !== '') {
+      if (this.form.value.image != this.user.image && this.form.value.image !== '' && this.user.image !== '' && this.user.image !== undefined) {
         let dataUrl = this.form.value.image;
         let imagePath = await this.firebaseSvc.getFilePath(this.user.image);
-        let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl)
+        let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
         this.form.controls['image'].setValue(imageUrl);
       }
 

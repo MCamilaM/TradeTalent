@@ -39,7 +39,6 @@ export class HomePage implements OnInit {
 
     let sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.users = res;
 
         this.loading = false;
