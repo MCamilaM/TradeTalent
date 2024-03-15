@@ -1,4 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -19,7 +21,7 @@ export class HomePage implements OnInit {
   users: User[] = [];
   loading: boolean = false;
 
-  constructor() { }
+  constructor(private navCtrl: NavController, private router: Router) { }
 
   ngOnInit() {
   }
@@ -32,7 +34,7 @@ export class HomePage implements OnInit {
     this.getProfiles();
   }
 
-  getProfiles(){
+  getProfiles() {
     let path = `users`;
 
     this.loading = true;
@@ -45,6 +47,10 @@ export class HomePage implements OnInit {
         sub.unsubscribe;
       }
     })
+  }
+
+  viewTalentProfile(user: User) {
+    this.router.navigate(['main/talent-profile', user.uid]);
   }
 
   // ========== Get products =======================

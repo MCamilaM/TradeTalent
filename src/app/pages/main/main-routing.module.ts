@@ -15,9 +15,14 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
-      }
+      },
+      {
+        path: 'talent-profile/:userId',
+        loadChildren: () => import('./view-talent-profile/view-talent-profile.module').then(m => m.ViewTalentProfilePageModule)
+      },
     ]
   },
+
 ];
 
 @NgModule({

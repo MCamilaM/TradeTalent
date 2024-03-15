@@ -19,7 +19,7 @@
             {{user.biography}}
           </ion-card-content>
 
-          <ion-button fill="solid" shape="round">Ver perfil</ion-button>
+          <ion-button (click)="viewTalentProfile(user)" fill="solid" shape="round">Ver perfil</ion-button>
           <ion-button fill="solid" shape="round">{{ (user.priceForHour || 10) | currency: 'USD'}} / hr</ion-button>
 
         </ion-card>

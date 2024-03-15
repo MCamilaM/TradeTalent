@@ -1,0 +1,25 @@
+<app-header title="Perfil"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="profile-card">
+    <ion-card-header>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="profile-picture">
+        <img [src]="user.image || 'assets/icon/profile.png'" alt="Foto de perfil">
+      </div>
+      <div class="profile-info">
+        <h2><strong>{{user.name}}</strong></h2>
+        <br>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        <p><strong>Biografía:</strong> {{user.biography}}</p>
+        <p><strong>Habilidades:</strong> {{user.abilities}}</p>
+        <p><strong>País:</strong> {{user.country}}</p>
+        <p><strong>Precio por hora:</strong> {{ (user.priceForHour || 10) | currency: 'USD'}} / hr</p>
+        <!-- <ion-button (click)="click()" expand="block" color="primary">Editar perfil</ion-button>-->
+        <ion-button expand="block" color="primary">Reservar</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
