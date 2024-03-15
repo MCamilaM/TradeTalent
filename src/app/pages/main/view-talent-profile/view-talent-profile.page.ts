@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ActivatedRoute } from '@angular/router';
+import { IonDatetime } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-talent-profile',
@@ -11,7 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewTalentProfilePage implements OnInit {
 
+  isActiveDateTime: boolean = false;
   userId!: string;
+  dateToday: string;
+  dateOneMonthLater: string;
+  
+  selectedDate: string;
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
@@ -26,16 +32,42 @@ export class ViewTalentProfilePage implements OnInit {
     abilities: '',
     country: '',
     priceForHour: undefined
-};
+  };
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.getCurrentDateTime()
+
     this.activatedRoute.params.subscribe(params => {
       this.userId = params['userId'];
     });
     this.getUser(this.userId)
   }
+
+  getCurrentDateTime() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const currentMonth = this.padNumber(currentDate.getMonth() + 1);
+    const oneMonthLater = this.padNumber(currentDate.getMonth() + 2);
+    const day = this.padNumber(currentDate.getDate());
+    const hours = this.padNumber(currentDate.getHours());
+    const minutes = this.padNumber(currentDate.getMinutes());
+    const seconds = this.padNumber(currentDate.getSeconds());
+
+    this.dateToday = `${year}-${currentMonth}-${day}T${hours}:${minutes}:${seconds}`;
+    this.dateOneMonthLater = `${year}-${oneMonthLater}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+
+  padNumber(number: number): string {
+    return number < 10 ? '0' + number : '' + number;
+  }
+
+  dateChanged(value){
+    console.log(value)
+  }
+
 
   getUser(uid: string) {
     let path = `users/${uid}`;
@@ -56,6 +88,10 @@ export class ViewTalentProfilePage implements OnInit {
         })
 
       })
+  }
+
+  showDateTimePicker() {
+    this.isActiveDateTime = true;
   }
 
 }
