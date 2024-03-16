@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'talent-profile/:userId',
         loadChildren: () => import('./view-talent-profile/view-talent-profile.module').then(m => m.ViewTalentProfilePageModule)
       },
+      {
+        path: 'reservations',
+        loadChildren: () => import('./reservations/reservations.module').then( m => m.ReservationsPageModule)
+      },
     ]
   },
 

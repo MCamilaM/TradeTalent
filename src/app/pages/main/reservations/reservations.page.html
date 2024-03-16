@@ -1,0 +1,29 @@
+<app-header title="Reservas"></app-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Reservaciones</ion-card-title>
+      <ion-card-subtitle> Estos son tus Mainstreams:</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let reservation of reservations">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" [src]="reservation.user.image || 'assets/icon/profile.png'" />
+          </ion-thumbnail>
+          <div style="display: flex; justify-content: space-between;">
+            <ion-card-header>
+              <ion-card-title>{{reservation.user.name}}</ion-card-title>
+              <ion-card-subtitle>Fecha de reserva:</ion-card-subtitle>
+
+              <div style="display: flex; justify-content: space-between;">
+                <ion-icon name="calendar-number-outline"></ion-icon>
+                <h5>.{{reservation.dateOfReserve}} </h5>
+              </div>
+            </ion-card-header>
+          </div>    
+        </ion-item>
+      </ion-list>
+    </ion-card-content>    
+  </ion-card>
+</ion-content>
