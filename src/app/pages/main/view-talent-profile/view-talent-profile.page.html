@@ -10,16 +10,16 @@
           </ion-card-header>
           <ion-card-content>
             <div class="profile-picture">
-              <img [src]="user.image || 'assets/icon/profile.png'" alt="Foto de perfil">
+              <img [src]="userTalent.image || 'assets/icon/profile.png'" alt="Foto de perfil">
             </div>
             <div class="profile-info">
-              <h2><strong>{{user.name}}</strong></h2>
+              <h2><strong>{{userTalent.name}}</strong></h2>
               <br>
-              <p><strong>Email:</strong> {{user.email}}</p>
-              <p><strong>Biografía:</strong> {{user.biography}}</p>
-              <p><strong>Habilidades:</strong> {{user.abilities}}</p>
-              <p><strong>País:</strong> {{user.country}}</p>
-              <p><strong>Precio por hora:</strong> {{ (user.priceForHour || 10) | currency: 'USD'}} / hr</p>
+              <p><strong>Email:</strong> {{userTalent.email}}</p>
+              <p><strong>Biografía:</strong> {{userTalent.biography}}</p>
+              <p><strong>Habilidades:</strong> {{userTalent.abilities}}</p>
+              <p><strong>País:</strong> {{userTalent.country}}</p>
+              <p><strong>Precio por hora:</strong> {{ (userTalent.priceForHour || 10) | currency: 'USD'}} / hr</p>
               <ion-button expand="block" (click)="showDateTimePicker()" color="primary">Reservar</ion-button>
             </div>
           </ion-card-content>
@@ -30,16 +30,17 @@
       <ion-col size="6" size-md="6" size-lg="6" size-sm="12" size-xs="12">
 
         <div class="calendar-container">
-          <ion-datetime #datetime *ngIf="isActiveDateTime" [min]="dateToday" [max]="dateOneMonthLater"
-             (ionChange)="dateChanged(datetime.value)">
+          <ion-datetime #datetime *ngIf="isActiveDateTime" [min]="dateToday" [max]="dateOneMonthLater"  minuteValues="0,15,30,45"
+          hourCycle="h23" (ionChange)="dateChanged(datetime.value)">
+             <span slot="title">Selecciona una fecha para la reservación</span>
+             <span slot="time-label">Tiempo</span>
             <ion-buttons slot="buttons">
-              <ion-button color="danger" (click)="datetime.reset()">Reset</ion-button>
-              <ion-button color="primary" (click)="datetime.cancel()">Never mind</ion-button>
-              <ion-button color="primary" (click)="datetime.confirm()">All Set</ion-button>
+              <ion-button color="danger" (click)="cancelReservation()">Cancelar</ion-button>
+              <ion-button color="danger" (click)="datetime.reset()">Resetear</ion-button>
+              <ion-button color="primary" (click)="datetime.confirm()">Reservar</ion-button>
             </ion-buttons>
           </ion-datetime>
         </div>
-
       </ion-col>
     </ion-row>
   </ion-grid>

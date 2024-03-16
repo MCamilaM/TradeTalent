@@ -52,7 +52,7 @@ export class FirebaseService {
 
   //======================== Database ===================================
 
-  //==========Get documents form collection==============
+  //==========Get documents from collection==============
   getCollectionData(path: string, collectionQuery?: any) {
     const ref = collection(getFirestore(), path);
     return collectionData(query(ref, collectionQuery), { idField: 'id' });
